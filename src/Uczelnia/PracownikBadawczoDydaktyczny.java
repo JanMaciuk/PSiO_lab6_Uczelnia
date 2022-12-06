@@ -1,3 +1,5 @@
+package Uczelnia;
+
 import java.io.Serializable;
 
 public class PracownikBadawczoDydaktyczny extends PracownikUczelni implements Serializable {

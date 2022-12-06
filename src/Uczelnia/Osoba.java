@@ -1,3 +1,5 @@
+package Uczelnia;
+
 import java.io.Serializable;
 
 public abstract class Osoba implements Serializable {

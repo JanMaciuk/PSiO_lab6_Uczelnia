@@ -1,6 +1,10 @@
+package Uczelnia;
+
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
+import Komparatory.*;
 
 public class Main {
     protected static ArrayList<PracownikBadawczoDydaktyczny> Naukowcy = new ArrayList<>();
@@ -12,17 +16,17 @@ public class Main {
         Administracja = deserializujAdministratorow("Administracja.txt");
         Studenci = deserializujStudentow("Studenci.txt");
 
-        // Pracownicy naukowi
-        /*Naukowcy.add(new PracownikBadawczoDydaktyczny("Profesor zwyczajny", 10, 75000, "Jan", "Kowalski", "183116788", 50, "M", "Pierogi", 15));
+
+       /* // Pracownicy naukowi
+        Naukowcy.add(new PracownikBadawczoDydaktyczny("Profesor zwyczajny", 10, 75000, "Jan", "Kowalski", "183116788", 50, "M", "Pierogi", 15));
         Naukowcy.add(new PracownikBadawczoDydaktyczny("Adiunkt", 5, 4000, "Janina", "Bąk", "980651121", 40, "K", "Pierogi", 2));
         Naukowcy.add(new PracownikBadawczoDydaktyczny("Wykładowca", 1, 3000, "Karol", "Kowalski", "785556788", 50, "M", "Słodycze", 10));
         Naukowcy.add(new PracownikBadawczoDydaktyczny("Profesor nadzwyczajny", 30, 8500, "Magda", "Mądra", "683416558", 70, "K", "Kurczak", 35));
-*/
+
         // Pracownicy administracji
-        /*Administracja.add(new PracownikAdministracyjny("Specjalista", 20, 10000, "Janusz", "Nosacz", "199556789", 50, "M", "Kurczak", 15));
+        Administracja.add(new PracownikAdministracyjny("Specjalista", 20, 10000, "Janusz", "Nosacz", "199556789", 50, "M", "Kurczak", 15));
         Administracja.add(new PracownikAdministracyjny("Referent", 2, 2500, "Kasia", "Dąb", "10265937592", 20, "K", "Pierogi", 1));
-*/
-        // Kursy
+        */// Kursy
         Kursy.add(new Kurs("Programowanie", Naukowcy.get(0), 4));
         Kursy.add(new Kurs("Matematyka ogólna", Naukowcy.get(1), 8));
         Kursy.add(new Kurs("Fizyka 1", Naukowcy.get(2), 6));
@@ -54,8 +58,15 @@ public class Main {
         ArrayList<Kurs> KursyStudenta5 = new ArrayList<>(Kursy); // ten student jest zapisany na wszystkie kursy, ambitnie.
         Studenci.add(new Student(31232, 1, false, true, true, "Jan", "Duda", "222156918", 20, "M", "Pierogi",KursyStudenta5));
 */
-
         dodajObiektyInput();
+        //Sortowanie
+        //KomparatorNazwisko komparator1 = new KomparatorNazwisko();
+        KomparatorNazwiskoImie komparatorOsoby = new KomparatorNazwiskoImie();
+        Collections.sort(Naukowcy, komparatorOsoby);
+        KomparatorKursy KomparatorK = new KomparatorKursy();
+        Collections.sort(Kursy,KomparatorK);
+
+
         /*System.out.println("Wyszukiwanie:");
         ArrayList<PracownikBadawczoDydaktyczny> wyszukaniNaukowcy = new ArrayList<>(szukajNaukowcow("Kurczak", "ulubione jedzenie"));
         printNaukowcy(wyszukaniNaukowcy);
