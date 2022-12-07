@@ -16,17 +16,8 @@ public class Main {
         Administracja = deserializujAdministratorow("Administracja.txt");
         Studenci = deserializujStudentow("Studenci.txt");
 
-
-       /* // Pracownicy naukowi
-        Naukowcy.add(new PracownikBadawczoDydaktyczny("Profesor zwyczajny", 10, 75000, "Jan", "Kowalski", "183116788", 50, "M", "Pierogi", 15));
-        Naukowcy.add(new PracownikBadawczoDydaktyczny("Adiunkt", 5, 4000, "Janina", "Bąk", "980651121", 40, "K", "Pierogi", 2));
-        Naukowcy.add(new PracownikBadawczoDydaktyczny("Wykładowca", 1, 3000, "Karol", "Kowalski", "785556788", 50, "M", "Słodycze", 10));
-        Naukowcy.add(new PracownikBadawczoDydaktyczny("Profesor nadzwyczajny", 30, 8500, "Magda", "Mądra", "683416558", 70, "K", "Kurczak", 35));
-
-        // Pracownicy administracji
-        Administracja.add(new PracownikAdministracyjny("Specjalista", 20, 10000, "Janusz", "Nosacz", "199556789", 50, "M", "Kurczak", 15));
-        Administracja.add(new PracownikAdministracyjny("Referent", 2, 2500, "Kasia", "Dąb", "10265937592", 20, "K", "Pierogi", 1));
-        */// Kursy
+        inicjalizujPracownikow();
+        // Kursy
         Kursy.add(new Kurs("Programowanie", Naukowcy.get(0), 4));
         Kursy.add(new Kurs("Matematyka ogólna", Naukowcy.get(1), 8));
         Kursy.add(new Kurs("Fizyka 1", Naukowcy.get(2), 6));
@@ -34,39 +25,19 @@ public class Main {
         Kursy.add(new Kurs("Statystyka", Naukowcy.get(3), 6));
         Kursy.add(new Kurs("Teoria prawdopodobieństwa", Naukowcy.get(3), 1));
         Kursy.add(new Kurs("Projektowanie maszyn", Naukowcy.get(2), 4));
-        // Studenci
-        /*ArrayList<Kurs> KursyStudenta1 = new ArrayList<>(Kursy); // ten student jest zapisany na wszystkie kursy, ambitnie.
-        Studenci.add(new Student(21242, 1, false, true, true, "Jan", "Maciuk", "183116788", 20, "M", "Pierogi",KursyStudenta1));
+        inicjalizujStudentow();
 
-        ArrayList<Kurs> KursyStudenta2 = new ArrayList<>();
-        KursyStudenta2.add(Kursy.get(0));
-        KursyStudenta2.add(Kursy.get(1));
-        KursyStudenta2.add(Kursy.get(2));
-        Studenci.add(new Student(21255, 2, true, true, false, "Karol", "Jękalski", "993116781", 22, "M", "Pierogi", KursyStudenta2));
-
-        ArrayList<Kurs> KursyStudenta3 = new ArrayList<>();
-        KursyStudenta3.add(Kursy.get(0));
-        KursyStudenta3.add(Kursy.get(3));
-        KursyStudenta3.add(Kursy.get(4));
-        KursyStudenta3.add(Kursy.get(5));
-        KursyStudenta3.add(Kursy.get(6));
-        Studenci.add(new Student(25266, 2, false, false, true, "Kasia", "Kowalska", "383119122", 29, "K", "Pierogi",KursyStudenta3));
-
-        ArrayList<Kurs> KursyStudenta4 = new ArrayList<>(); // ten student nie jest obecnie zapisany na żadne kursy, nie zapisał się w systemie.
-        Studenci.add(new Student(31351, 2, false, true, false, "Karol", "Mały", "981116311", 22, "M", "Pierogi",KursyStudenta4 ));
-
-        ArrayList<Kurs> KursyStudenta5 = new ArrayList<>(Kursy); // ten student jest zapisany na wszystkie kursy, ambitnie.
-        Studenci.add(new Student(31232, 1, false, true, true, "Jan", "Duda", "222156918", 20, "M", "Pierogi",KursyStudenta5));
-*/
         dodajObiektyInput();
-        //Sortowanie
-        //KomparatorNazwisko komparator1 = new KomparatorNazwisko();
+        //Sortowanie:
+       /* KomparatorNazwisko komparatorOsoby = new KomparatorNazwisko(); */
         KomparatorNazwiskoImie komparatorOsoby = new KomparatorNazwiskoImie();
         Collections.sort(Naukowcy, komparatorOsoby);
+        Collections.sort(Administracja, komparatorOsoby);
+        Collections.sort(Studenci, komparatorOsoby);
         KomparatorKursy KomparatorK = new KomparatorKursy();
         Collections.sort(Kursy,KomparatorK);
 
-
+        //Wyszukiwanie:
         /*System.out.println("Wyszukiwanie:");
         ArrayList<PracownikBadawczoDydaktyczny> wyszukaniNaukowcy = new ArrayList<>(szukajNaukowcow("Kurczak", "ulubione jedzenie"));
         printNaukowcy(wyszukaniNaukowcy);
@@ -92,7 +63,43 @@ public class Main {
 
     }
 
-    //wyszukiwanie:
+    //Inicjalizacja obiektów:
+    public static void inicjalizujPracownikow(){
+        //Naukowcy
+        Naukowcy.add(new PracownikBadawczoDydaktyczny("Profesor zwyczajny", 10, 75000, "Jan", "Kowalski", "183116788", 50, "M", "Pierogi", 15));
+        Naukowcy.add(new PracownikBadawczoDydaktyczny("Adiunkt", 5, 4000, "Janina", "Bąk", "980651121", 40, "K", "Pierogi", 2));
+        Naukowcy.add(new PracownikBadawczoDydaktyczny("Wykładowca", 1, 3000, "Karol", "Kowalski", "785556788", 50, "M", "Słodycze", 10));
+        Naukowcy.add(new PracownikBadawczoDydaktyczny("Profesor nadzwyczajny", 30, 8500, "Magda", "Mądra", "683416558", 70, "K", "Kurczak", 35));
+        // Pracownicy administracji
+        Administracja.add(new PracownikAdministracyjny("Specjalista", 20, 10000, "Janusz", "Nosacz", "199556789", 50, "M", "Kurczak", 15));
+        Administracja.add(new PracownikAdministracyjny("Referent", 2, 2500, "Kasia", "Dąb", "10265937592", 20, "K", "Pierogi", 1));
+        }
+        public static void inicjalizujStudentow(){ // Studenci
+            ArrayList<Kurs> KursyStudenta1 = new ArrayList<>(Kursy); // ten student jest zapisany na wszystkie kursy, ambitnie.
+            Studenci.add(new Student(21242, 1, false, true, true, "Jan", "Maciuk", "183116788", 20, "M", "Pierogi",KursyStudenta1));
+
+            ArrayList<Kurs> KursyStudenta2 = new ArrayList<>();
+            KursyStudenta2.add(Kursy.get(0));
+            KursyStudenta2.add(Kursy.get(1));
+            KursyStudenta2.add(Kursy.get(2));
+            Studenci.add(new Student(21255, 2, true, true, false, "Karol", "Jękalski", "993116781", 22, "M", "Pierogi", KursyStudenta2));
+
+            ArrayList<Kurs> KursyStudenta3 = new ArrayList<>();
+            KursyStudenta3.add(Kursy.get(0));
+            KursyStudenta3.add(Kursy.get(3));
+            KursyStudenta3.add(Kursy.get(4));
+            KursyStudenta3.add(Kursy.get(5));
+            KursyStudenta3.add(Kursy.get(6));
+            Studenci.add(new Student(25266, 2, false, false, true, "Kasia", "Kowalska", "383119122", 29, "K", "Pierogi",KursyStudenta3));
+
+            ArrayList<Kurs> KursyStudenta4 = new ArrayList<>(); // ten student nie jest obecnie zapisany na żadne kursy, nie zapisał się w systemie.
+            Studenci.add(new Student(31351, 2, false, true, false, "Karol", "Mały", "981116311", 22, "M", "Pierogi",KursyStudenta4 ));
+
+            ArrayList<Kurs> KursyStudenta5 = new ArrayList<>(Kursy); // ten student jest zapisany na wszystkie kursy, ambitnie.
+            Studenci.add(new Student(31232, 1, false, true, true, "Jan", "Duda", "222156918", 20, "M", "Pierogi",KursyStudenta5));
+        }
+
+    //Wyszukiwanie:
     public static ArrayList<PracownikBadawczoDydaktyczny> szukajNaukowcow(String fraza, String selektor)  {
         ArrayList<PracownikBadawczoDydaktyczny> wynik = new ArrayList<>();
         switch(selektor) {
@@ -337,6 +344,7 @@ public class Main {
         return wynik;
     }
 
+   // Print:
     public static void printAdministracja(ArrayList<PracownikAdministracyjny> lista) {
         System.out.println("Żądana lista pracowników administracyjnych:");
         for (PracownikAdministracyjny admin : lista) {
@@ -369,7 +377,7 @@ public class Main {
         System.out.println();
     }
 
-
+    //Input użytkownika:
     public static void dodajObiektyInput() {
         Scanner scanner = new Scanner(System.in);
         boolean run = true;
@@ -497,6 +505,7 @@ public class Main {
         }
     }
 
+    //Serializacja
     public static void serializujNaukowcow(ArrayList<PracownikBadawczoDydaktyczny> lista, String plik) {
         try {
             FileOutputStream fout = new FileOutputStream(plik);
@@ -528,6 +537,7 @@ public class Main {
         catch (IOException e) {System.out.println("Błąd zapisywania pliku");}
     }
 
+    //Deserliazacja
     public static ArrayList<PracownikBadawczoDydaktyczny> deserializujNaukowcow(String plik) {
         ArrayList<PracownikBadawczoDydaktyczny> lista = new ArrayList<>();
         try {
