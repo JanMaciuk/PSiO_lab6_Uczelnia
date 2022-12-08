@@ -2,7 +2,6 @@ package Uczelnia;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Scanner;
 import Komparatory.*;
 
@@ -15,51 +14,27 @@ public class Main {
         Naukowcy = deserializujNaukowcow("Naukowcy.txt");
         Administracja = deserializujAdministratorow("Administracja.txt");
         Studenci = deserializujStudentow("Studenci.txt");
+        Kursy = deserializujKursy("Kursy.txt");
 
-        inicjalizujPracownikow();
-        // Kursy
-        Kursy.add(new Kurs("Programowanie", Naukowcy.get(0), 4));
-        Kursy.add(new Kurs("Matematyka ogólna", Naukowcy.get(1), 8));
-        Kursy.add(new Kurs("Fizyka 1", Naukowcy.get(2), 6));
-        Kursy.add(new Kurs("Analiza matematyczna", Naukowcy.get(3), 8));
-        Kursy.add(new Kurs("Statystyka", Naukowcy.get(3), 6));
-        Kursy.add(new Kurs("Teoria prawdopodobieństwa", Naukowcy.get(3), 1));
-        Kursy.add(new Kurs("Projektowanie maszyn", Naukowcy.get(2), 4));
-        inicjalizujStudentow();
+        /*inicjalizujPracownikow();
+        inicjalizujKursy();
+        inicjalizujStudentow();*/
 
         dodajObiektyInput();
         //Sortowanie:
        /* KomparatorNazwisko komparatorOsoby = new KomparatorNazwisko(); */
         KomparatorNazwiskoImie komparatorOsoby = new KomparatorNazwiskoImie();
-        Collections.sort(Naukowcy, komparatorOsoby);
-        Collections.sort(Administracja, komparatorOsoby);
-        Collections.sort(Studenci, komparatorOsoby);
+        Naukowcy.sort(komparatorOsoby);
+        Administracja.sort(komparatorOsoby);
+        Studenci.sort(komparatorOsoby);
         KomparatorKursy KomparatorK = new KomparatorKursy();
-        Collections.sort(Kursy,KomparatorK);
+        Kursy.sort(KomparatorK);
 
-        //Wyszukiwanie:
-        /*System.out.println("Wyszukiwanie:");
-        ArrayList<PracownikBadawczoDydaktyczny> wyszukaniNaukowcy = new ArrayList<>(szukajNaukowcow("Kurczak", "ulubione jedzenie"));
-        printNaukowcy(wyszukaniNaukowcy);
-
-        ArrayList<PracownikAdministracyjny> wyszukaniAdministratorzy = new ArrayList<>(szukajAdministracji("Specjalista", "stanowisko"));
-        printAdministracja(wyszukaniAdministratorzy);
-
-        ArrayList<Student> wyszukaniStudenci = new ArrayList<>(szukajStudentow("Fizyka 1", "kurs"));
-        printStudenci(wyszukaniStudenci);
-
-        ArrayList<Kurs> wyszukaneKursy = new ArrayList<>(szukajKursow("Jan", "prowadzący"));
-        printKursy(wyszukaneKursy);
-*/
-        System.out.println("Teraz wszyscy i wszystko:");
-        printNaukowcy(Naukowcy);
-        printAdministracja(Administracja);
-        printStudenci(Studenci);
-        printKursy(Kursy);
 
         serializujNaukowcow(Naukowcy,"Naukowcy.txt");
         serializujAdministratorow(Administracja,"Administracja.txt");
-        serializujStodentow(Studenci,"Studenci.txt");
+        serializujStudentow(Studenci,"Studenci.txt");
+        serializujKursy(Kursy,"Kursy.txt");
 
     }
 
@@ -74,7 +49,7 @@ public class Main {
         Administracja.add(new PracownikAdministracyjny("Specjalista", 20, 10000, "Janusz", "Nosacz", "199556789", 50, "M", "Kurczak", 15));
         Administracja.add(new PracownikAdministracyjny("Referent", 2, 2500, "Kasia", "Dąb", "10265937592", 20, "K", "Pierogi", 1));
         }
-        public static void inicjalizujStudentow(){ // Studenci
+    public static void inicjalizujStudentow(){ // Studenci
             ArrayList<Kurs> KursyStudenta1 = new ArrayList<>(Kursy); // ten student jest zapisany na wszystkie kursy, ambitnie.
             Studenci.add(new Student(21242, 1, false, true, true, "Jan", "Maciuk", "183116788", 20, "M", "Pierogi",KursyStudenta1));
 
@@ -98,6 +73,14 @@ public class Main {
             ArrayList<Kurs> KursyStudenta5 = new ArrayList<>(Kursy); // ten student jest zapisany na wszystkie kursy, ambitnie.
             Studenci.add(new Student(31232, 1, false, true, true, "Jan", "Duda", "222156918", 20, "M", "Pierogi",KursyStudenta5));
         }
+    public static void inicjalizujKursy(){
+        Kursy.add(new Kurs("Programowanie", Naukowcy.get(0), 4));
+        Kursy.add(new Kurs("Matematyka ogólna", Naukowcy.get(1), 8));
+        Kursy.add(new Kurs("Fizyka 1", Naukowcy.get(2), 6));
+        Kursy.add(new Kurs("Analiza matematyczna", Naukowcy.get(3), 8));
+        Kursy.add(new Kurs("Statystyka", Naukowcy.get(3), 6));
+        Kursy.add(new Kurs("Teoria prawdopodobieństwa", Naukowcy.get(3), 1));
+        Kursy.add(new Kurs("Projektowanie maszyn", Naukowcy.get(2), 4));}
 
     //Wyszukiwanie:
     public static ArrayList<PracownikBadawczoDydaktyczny> szukajNaukowcow(String fraza, String selektor)  {
@@ -244,7 +227,15 @@ public class Main {
                     }
                 }
                 break;
+            case "nadgodziny":
+                for (PracownikAdministracyjny admin : Administracja) {
+                    if (fraza.equals(Integer.toString(admin.getLiczbaNadgodzin()))) {
+                        wynik.add(admin);
+                    }
+                }
+                break;
             }
+
         return wynik;
     }
 
@@ -388,7 +379,8 @@ public class Main {
                     1 - dodaj naukowca\s
                     2 - dodaj administratora\s
                     3 - dodaj studenta\s
-                    4 - dodaj kurs""");
+                    4 - dodaj kurs\s
+                    5-  wyszukiwanie""");
             wybor = scanner.nextInt();
             scanner.nextLine();
             try { switch (wybor) {
@@ -494,6 +486,9 @@ public class Main {
                     int prowadzacyK = Integer.parseInt(scanner.nextLine());
                     Kursy.add(new Kurs(nazwaK,Naukowcy.get(prowadzacyK),ectsK));
                     break;
+                case 5:
+                    szukajUser();
+                    break;
             }}
             catch ( java.util.InputMismatchException | java.lang.NumberFormatException e) {
                 System.out.println("Wpisałeś błędny typ danych!");
@@ -504,6 +499,71 @@ public class Main {
 
         }
     }
+    public static void szukajUser() {
+        Scanner scanner = new Scanner(System.in);
+        boolean run = true;
+        int wybor;
+        while (run) {
+            System.out.println("""
+                    0 - wyjdź\s
+                    1 - wyszukaj naukowców\s
+                    2 - wyszukaj administratorów\s
+                    3 - wyszukaj studentów\s
+                    4 - wyszukaj kursy\s
+                    5-  wyświetl wszystkich""");
+            wybor = scanner.nextInt();
+            scanner.nextLine();
+            String selektor;
+            String fraza;
+            try { switch (wybor) {
+                case 0:
+                    run = false;
+                    break;
+                case 1:
+                    System.out.println("Wyszukaj naukowców po:");
+                    selektor = scanner.nextLine();
+                    System.out.println("Fraza do wyszukania:");
+                    fraza = scanner.nextLine();
+                    printNaukowcy(szukajNaukowcow(fraza,selektor));
+                    break;
+                case 2:
+                    System.out.println("Wyszukaj administratorów po:");
+                    selektor = scanner.nextLine();
+                    System.out.println("Fraza do wyszukania:");
+                    fraza = scanner.nextLine();
+                    printAdministracja(szukajAdministracji(fraza,selektor));
+                    break;
+                case 3:
+                    System.out.println("Wyszukaj studentów po:");
+                    selektor = scanner.nextLine();
+                    System.out.println("Fraza do wyszukania:");
+                    fraza = scanner.nextLine();
+                    printStudenci(szukajStudentow(fraza,selektor));
+                    break;
+                case 4:
+                    System.out.println("Wyszukaj kursy po:");
+                    selektor = scanner.nextLine();
+                    System.out.println("Fraza do wyszukania:");
+                    fraza = scanner.nextLine();
+                    printKursy(szukajKursow(fraza,selektor));
+                    break;
+                case 5:
+                    System.out.println("========================================");
+                    System.out.println("Wszyscy i wszystko:");
+                    printNaukowcy(Naukowcy);
+                    printAdministracja(Administracja);
+                    printStudenci(Studenci);
+                    printKursy(Kursy);
+                    break;
+
+
+            }}
+            catch ( java.util.InputMismatchException | java.lang.NumberFormatException e) {
+                System.out.println("Wpisałeś błędny typ danych!");
+                scanner.nextLine();
+            }
+        }}
+
 
     //Serializacja
     public static void serializujNaukowcow(ArrayList<PracownikBadawczoDydaktyczny> lista, String plik) {
@@ -526,7 +586,17 @@ public class Main {
         }
         catch (IOException e) {System.out.println("Błąd zapisywania pliku");}
     }
-    public static void serializujStodentow(ArrayList<Student> lista, String plik) {
+    public static void serializujStudentow(ArrayList<Student> lista, String plik) {
+        try {
+            FileOutputStream fout = new FileOutputStream(plik);
+            ObjectOutputStream oout = new ObjectOutputStream(fout);
+            oout.writeObject(lista);
+            oout.close();
+            fout.close();
+        }
+        catch (IOException e) {System.out.println("Błąd zapisywania pliku");}
+    }
+    public static void serializujKursy(ArrayList<Kurs> lista, String plik) {
         try {
             FileOutputStream fout = new FileOutputStream(plik);
             ObjectOutputStream oout = new ObjectOutputStream(fout);
@@ -568,6 +638,18 @@ public class Main {
             FileInputStream fin = new FileInputStream(plik);
             ObjectInputStream oin = new ObjectInputStream(fin);
             lista = (ArrayList<Student>) oin.readObject();
+            oin.close();
+            fin.close();
+        }
+        catch (IOException | ClassNotFoundException e) {System.out.println("Błąd odczytu pliku");}
+        return lista;
+    }
+    public static ArrayList<Kurs> deserializujKursy(String plik) {
+        ArrayList<Kurs> lista = new ArrayList<>();
+        try {
+            FileInputStream fin = new FileInputStream(plik);
+            ObjectInputStream oin = new ObjectInputStream(fin);
+            lista = (ArrayList<Kurs>) oin.readObject();
             oin.close();
             fin.close();
         }
