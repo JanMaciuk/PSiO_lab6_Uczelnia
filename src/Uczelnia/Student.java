@@ -2,6 +2,7 @@ package Uczelnia;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import WzorceProjektowe.*;
 
 public class Student extends Osoba implements Serializable {
     private int numerIndeksu;
@@ -10,6 +11,13 @@ public class Student extends Osoba implements Serializable {
     private boolean pierwszyStopienStudiow; // jeżeli false to drugi stopien studiów (Nie mamy doktorantów na tej uczelni)
     private boolean stacjonarny; // jeżeli false to niestacjonarny
     private ArrayList<Kurs> listaKursow = new ArrayList<>();
+
+
+    public void update() {
+        System.out.println("Student " + this.getImie() + " " + this.getNazwisko() + " został usunięty z listy studentów");
+        System.out.println("Wysyłanie powiadomienia email do studenta");
+        // wysyłamy mail do studenta który jest observerem, że został usunięty z listy studentów.
+    }
 
     public Student(int numerIndeksu, int rokStudiow, boolean erasmus, boolean pierwszyStopienStudiow, boolean stacjonarny, String imie, String nazwisko, String pesel, int wiek, String plec, String jedzenie, ArrayList<Kurs> kursy) {
         super(imie, nazwisko, pesel, wiek, plec, jedzenie);
