@@ -380,7 +380,8 @@ public class Main {
                     2 - dodaj administratora\s
                     3 - dodaj studenta\s
                     4 - dodaj kurs\s
-                    5-  wyszukiwanie""");
+                    5-  wyszukiwanie\s
+                    6 - usuwanie\s""");
             wybor = scanner.nextInt();
             scanner.nextLine();
             try { switch (wybor) {
@@ -489,6 +490,9 @@ public class Main {
                 case 5:
                     szukajUser();
                     break;
+                case 6:
+                    usunUser();
+                    break;
             }}
             catch ( java.util.InputMismatchException | java.lang.NumberFormatException e) {
                 System.out.println("Wpisałeś błędny typ danych!");
@@ -563,6 +567,69 @@ public class Main {
                 scanner.nextLine();
             }
         }}
+    public static void usunUser() {
+            Scanner scanner = new Scanner(System.in);
+            boolean run = true;
+            int wybor;
+            while (run) {
+                System.out.println("""
+                    0 - wyjdź\s
+                    1 - usuń naukowców\s
+                    2 - usuń administratorów\s
+                    3 - usuń studentów\s
+                    4 - usuń kursy""");
+                wybor = scanner.nextInt();
+                scanner.nextLine();
+                String selektor;
+                String fraza;
+                try { switch (wybor) {
+                    case 0:
+                        run = false;
+                        break;
+                    case 1:
+                        System.out.println("Wyszukaj naukowców po:");
+                        selektor = scanner.nextLine();
+                        System.out.println("Fraza do wyszukania:");
+                        fraza = scanner.nextLine();
+                        Naukowcy.removeAll(szukajNaukowcow(fraza,selektor));
+                        System.out.println("Lista po usuwaniu:");
+                        printNaukowcy(Naukowcy);
+                        break;
+                    case 2:
+                        System.out.println("Wyszukaj administratorów po:");
+                        selektor = scanner.nextLine();
+                        System.out.println("Fraza do wyszukania:");
+                        fraza = scanner.nextLine();
+                        Administracja.removeAll(szukajAdministracji(fraza,selektor));
+                        System.out.println("Lista po usuwaniu:");
+                        printAdministracja(Administracja);
+                        break;
+                    case 3:
+                        System.out.println("Wyszukaj studentów po:");
+                        selektor = scanner.nextLine();
+                        System.out.println("Fraza do wyszukania:");
+                        fraza = scanner.nextLine();
+                        Studenci.removeAll(szukajStudentow(fraza,selektor));
+                        System.out.println("Lista po usuwaniu:");
+                        printStudenci(Studenci);
+                        break;
+                    case 4:
+                        System.out.println("Wyszukaj kursy po:");
+                        selektor = scanner.nextLine();
+                        System.out.println("Fraza do wyszukania:");
+                        fraza = scanner.nextLine();
+                        Kursy.removeAll(szukajKursow(fraza,selektor));
+                        System.out.println("Lista po usuwaniu:");
+                        printKursy(Kursy);
+                        break;
+
+                }}
+                catch ( java.util.InputMismatchException | java.lang.NumberFormatException e) {
+                    System.out.println("Wpisałeś błędny typ danych!");
+                    scanner.nextLine();
+                }
+            }
+    }
 
 
     //Serializacja
