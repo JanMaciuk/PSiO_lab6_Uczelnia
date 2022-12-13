@@ -380,7 +380,7 @@ public class Main {
                     2 - dodaj administratora\s
                     3 - dodaj studenta\s
                     4 - dodaj kurs\s
-                    5-  wyszukiwanie\s
+                    5 - wyszukiwanie\s
                     6 - usuwanie\s""");
             wybor = scanner.nextInt();
             scanner.nextLine();
@@ -514,7 +514,7 @@ public class Main {
                     2 - wyszukaj administratorów\s
                     3 - wyszukaj studentów\s
                     4 - wyszukaj kursy\s
-                    5-  wyświetl wszystkich""");
+                    5 - wyświetl wszystkich""");
             wybor = scanner.nextInt();
             scanner.nextLine();
             String selektor;
@@ -722,5 +722,15 @@ public class Main {
         }
         catch (IOException | ClassNotFoundException e) {System.out.println("Błąd odczytu pliku");}
         return lista;
+    }
+
+    public static ArrayList<Student> getStudenci() {
+        if (Studenci.size() == 0) {Studenci = deserializujStudentow("Studenci.txt");}
+        return Studenci;
+    }
+
+    public static void setStudenci(ArrayList<Student> studenci) {
+        Studenci = studenci;
+        serializujStudentow(Studenci,"Studenci.txt");
     }
 }
