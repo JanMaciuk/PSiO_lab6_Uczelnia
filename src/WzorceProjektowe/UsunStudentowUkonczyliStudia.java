@@ -7,7 +7,7 @@ public class UsunStudentowUkonczyliStudia implements StrategieUsuwaniaStudentow 
     public ArrayList<Student> wykreslaniStudenci() {
         ArrayList<Student> studenciDoWykreslenia = new ArrayList<>();
         for (Student student : Uczelnia.Main.getStudenci()) {
-            if (student.getRokStudiow() > 4 && !student.isPierwszyStopienStudiow()) {
+            if (student.getRokStudiow() > 4 && student.isPierwszyStopienStudiow()) {
                 studenciDoWykreslenia.add(student);
             }
         }

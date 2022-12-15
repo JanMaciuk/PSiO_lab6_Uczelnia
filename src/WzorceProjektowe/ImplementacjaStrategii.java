@@ -6,7 +6,6 @@ public class ImplementacjaStrategii implements Observable {
 
     public void notifyObserver(Student student) {
             student.update();
-
     }
     public static void main(String[] args) {
 
@@ -34,6 +33,7 @@ public class ImplementacjaStrategii implements Observable {
             System.out.println("Lista studentów którzy ukończyli naukę i zostaną usunięci:");
             Uczelnia.Main.printStudenci(listaStudentowDoWykreslenia);
         }
+        listaStudentowDoWykreslenia.forEach(Student::update);
         listaStudentow.removeAll(listaStudentowDoWykreslenia);
         Uczelnia.Main.setStudenci(listaStudentow);
 }}

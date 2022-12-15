@@ -16,13 +16,17 @@ public class Main {
         Studenci = deserializujStudentow("Studenci.txt");
         Kursy = deserializujKursy("Kursy.txt");
 
-        /*inicjalizujPracownikow();
-        inicjalizujKursy();
-        inicjalizujStudentow();*/
+        //ArrayList<Kurs> KursyStudenta4 = new ArrayList<>(); // ten student nie jest obecnie zapisany na żadne kursy, nie zapisał się w systemie.
+        //Studenci.add(new Student(31351, 2, false, true, false, "Karol", "Mały", "981116311", 22, "M", "Pierogi",KursyStudenta4 ));
+
+        //*inicjalizujPracownikow();
+        //inicjalizujKursy();
+        //inicjalizujStudentow();
 
         dodajObiektyInput();
         //Sortowanie:
-       /* KomparatorNazwisko komparatorOsoby = new KomparatorNazwisko(); */
+        //KomparatorNazwisko komparatorOsoby = new KomparatorNazwisko();
+        //KomparatorNazwiskoWiek komparatorOsoby = new KomparatorNazwiskoWiek();
         KomparatorNazwiskoImie komparatorOsoby = new KomparatorNazwiskoImie();
         Naukowcy.sort(komparatorOsoby);
         Administracja.sort(komparatorOsoby);
