@@ -23,7 +23,6 @@ public class Main {
         //inicjalizujKursy();
         //inicjalizujStudentow();
 
-        dodajObiektyInput();
         //Sortowanie:
         //KomparatorNazwisko komparatorOsoby = new KomparatorNazwisko();
         //KomparatorNazwiskoWiek komparatorOsoby = new KomparatorNazwiskoWiek();
@@ -32,6 +31,9 @@ public class Main {
         Administracja.sort(komparatorOsoby);
         Studenci.sort(komparatorOsoby);
         KomparatorKursy KomparatorK = new KomparatorKursy();
+        Kursy.sort(KomparatorK);
+        //TODO wybór sortowania z interfejsu graficznego
+        dodajObiektyInput();
         Kursy.sort(KomparatorK);
 
 
@@ -153,7 +155,7 @@ public class Main {
                     }
                 }
                 break;
-            case "Płeć":
+            case "płeć":
                 for (PracownikBadawczoDydaktyczny naukowiec : Naukowcy) {
                     if (naukowiec.getPlec().equals(fraza)) {
                         wynik.add(naukowiec);

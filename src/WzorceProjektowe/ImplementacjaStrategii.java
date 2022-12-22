@@ -34,7 +34,8 @@ public class ImplementacjaStrategii implements Observable {
             System.out.println("Lista studentów którzy ukończyli naukę i zostaną usunięci:");
             Uczelnia.Main.printStudenci(listaStudentowDoWykreslenia);
         }
-        listaStudentowDoWykreslenia.forEach(Student::update);
+        EventListeners = listaStudentowDoWykreslenia;
+        EventListeners.forEach(Student::update);
         listaStudentow.removeAll(listaStudentowDoWykreslenia);
         Uczelnia.Main.setStudenci(listaStudentow);
 }}
